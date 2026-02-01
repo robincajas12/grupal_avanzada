@@ -14,6 +14,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.jboss.weld.se:weld-se-core:6.0.3.Final")
+    // Source: https://mvnrepository.com/artifact/io.smallrye.config/smallrye-config
+    implementation("io.smallrye.config:smallrye-config:3.16.0")
+    // Source: https://mvnrepository.com/artifact/org.eclipse.jnosql.databases/jnosql-neo4j
+    implementation("org.eclipse.jnosql.databases:jnosql-neo4j:1.1.12")
+
 }
 sourceSets{
     main{
