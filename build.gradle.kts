@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("io.freefair.lombok") version "9.1.0"
 }
 
 group = "com.project007"
@@ -19,6 +20,9 @@ dependencies {
     implementation("io.smallrye.config:smallrye-config:3.16.0")
     // Source: https://mvnrepository.com/artifact/org.eclipse.jnosql.databases/jnosql-neo4j
     implementation("org.eclipse.jnosql.databases:jnosql-neo4j:1.1.12")
+    implementation("io.smallrye:jandex:3.1.2")
+
+
 
 }
 sourceSets{

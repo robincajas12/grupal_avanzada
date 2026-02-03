@@ -1,14 +1,22 @@
 package com.project007.db;
 
 import jakarta.nosql.Column;
+import jakarta.nosql.Embeddable;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class LineItem {
-
     @Id
-    private Long id;
+    private String id;
 
     @Column
     private Integer quantity;
@@ -16,9 +24,7 @@ public class LineItem {
     @Column
     private Integer idx;
 
-    @Column
+    // Relación hacia el libro (Muchos items pueden apuntar al mismo libro)
+    @Column("REFERENCES_BOOK")
     private Book book;
-
-    @Column
-    private PurchaseOrder purchaseOrder;
 }

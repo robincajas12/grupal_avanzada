@@ -3,14 +3,21 @@ package com.project007.db;
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Customer {
-
     @Id
-    private Long id;
+    private String id;
 
     @Column
     private String name;
@@ -20,7 +27,4 @@ public class Customer {
 
     @Column
     private Integer version;
-
-    @Column
-    private List<PurchaseOrder> orders;
 }

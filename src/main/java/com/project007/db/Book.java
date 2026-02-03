@@ -3,13 +3,17 @@ package com.project007.db;
 import jakarta.nosql.Column;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
-
     @Id
     private String isbn;
 
@@ -17,14 +21,13 @@ public class Book {
     private String title;
 
     @Column
-    private BigDecimal price;
+    private Double price;
 
-    @Column
+    // Muchos a Muchos: La flecha sale de Book hacia Author
+    @Column("WRITTEN_BY")
     private List<Author> authors;
 
-    @Column
-    private List<Inventory> inventories;
-
-    @Column
-    private List<LineItem> lineItems;
+    // Uno a Uno: La flecha sale de Book hacia Inventory
+    @Column("HAS_STOCK")
+    private Inventory inventory;
 }

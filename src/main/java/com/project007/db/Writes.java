@@ -6,7 +6,6 @@ import jakarta.nosql.Id;
 // no se como son las relaciones :O
 public class Writes {
 
-    @Id
     private String id;
 
     private Book book;
