@@ -15,7 +15,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class LineItem {
-    @Id
+
+    @Id("order_id")
     private String id;
 
     @Column
@@ -24,7 +25,7 @@ public class LineItem {
     @Column
     private Integer idx;
 
-    // Relación hacia el libro (Muchos items pueden apuntar al mismo libro)
-    @Column("REFERENCES_BOOK")
-    private Book book;
+//    // Relación hacia el libro (Muchos items pueden apuntar al mismo libro)
+//    @Column("REFERENCES_BOOK")
+//    private Book book;
 }

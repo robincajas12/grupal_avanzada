@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 public class Inventory {
     @Id
-    private String id; // Recomiendo usar un ID único o el mismo ISBN
+    private String bookIsbn;
 
     @Column
     private Long sold;

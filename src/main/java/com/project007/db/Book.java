@@ -1,12 +1,13 @@
 package com.project007.db;
 
 import jakarta.nosql.Column;
+import jakarta.nosql.Convert;
 import jakarta.nosql.Entity;
 import jakarta.nosql.Id;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -21,13 +22,9 @@ public class Book {
     private String title;
 
     @Column
-    private Double price;
+    @Convert(BigDecimalConverter.class)
+    private BigDecimal price;
 
-    // Muchos a Muchos: La flecha sale de Book hacia Author
-    @Column("WRITTEN_BY")
-    private List<Author> authors;
+    @Column Integer version;
 
-    // Uno a Uno: La flecha sale de Book hacia Inventory
-    @Column("HAS_STOCK")
-    private Inventory inventory;
 }

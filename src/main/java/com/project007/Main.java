@@ -3,10 +3,14 @@ package com.project007;
 import com.project007.db.*;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
+import org.eclipse.jnosql.mapping.graph.EdgeBuilder;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,61 +18,59 @@ public class Main {
         try (SeContainer container = SeContainerInitializer.newInstance().initialize()) {
             GraphTemplate template = container.select(GraphTemplate.class).get();
 
-            // 1. Limpiar base de datos (Opcional, para pruebas limpias)
-            // template.getGraph().cypher("MATCH (n) DETACH DELETE n");
+            // Ejemplos
 
-            // 2. Crear el Autor
             Author author = new Author();
-            author.setId("auth-mathias");
-            author.setName("Mathias Malzieu");
+            author.setName("Garcia Marquez");
             author.setVersion(1);
-            // Insertamos el autor primero
             template.insert(author);
 
-            // 3. Crear el Inventario
-            Inventory inventory = new Inventory();
-            inventory.setId("inv-abs-001");
-            inventory.setSold(50L);
-            inventory.setSupplied(100);
-            inventory.setVersion(1);
-            // Insertamos el inventario
-            template.insert(inventory);
-
-            // 4. Crear el Libro y asociar Autor e Inventario
             Book book = new Book();
-            book.setIsbn("ABS-12345");
-            book.setTitle("La mecanica del corazon");
-            book.setPrice(15.50);
-
-            // Relaciones: JNoSQL creará las flechas en Neo4j
-            book.setAuthors(Collections.singletonList(author));
-            book.setInventory(inventory); // Relación 1 a 1 corregida
-
-            // Al insertar el libro, se crean las relaciones WRITTEN_BY y HAS_STOCK
+            book.setTitle("Cien Años de Seriedad");
+            book.setPrice(BigDecimal.valueOf(100.4));
+            book.setVersion(1);
             template.insert(book);
 
-            // 5. Crear un Cliente y una Orden para probar el resto del flujo
-            Customer customer = new Customer();
-            customer.setId("cust-jonathan");
-            customer.setName("Jonathan Suarez");
-            customer.setEmail("jonathan@example.com");
-            template.insert(customer);
+            Customer c = new Customer();
+            c.setEmail("robincajas@uce.edu.ec");
+            c.setName("Robin Cajas");
+            c.setVersion(1);
+            template.insert(c);
 
-            LineItem item = new LineItem();
-            item.setId("item-001");
-            item.setQuantity(2);
-            item.setBook(book); // El item apunta al libro
-            template.insert(item);
+            Inventory i = new Inventory();
+            i.setSupplied(1);
+            i.setVersion(1);
+            i.setSold(45L);
+            template.insert(i);
 
-            PurchaseOrder order = new PurchaseOrder();
-            order.setId("order-999");
-            order.setTotal(31);
-            // order.setStatus(PurchaseOrder.Status.ESTADO1);
-            order.setCustomer(customer); // La orden apunta al cliente
-            order.setItems(Collections.singletonList(item)); // La orden contiene el item
-            template.insert(order);
+            LineItem lineItem = new LineItem();
+            lineItem.setIdx(10);
+            lineItem.setQuantity(15);
+            template.insert(lineItem);
 
-            System.out.println("¡Éxito! Estructura completa guardada en Neo4j.");
+            PurchaseOrder purchaseOrder = new PurchaseOrder();
+            purchaseOrder.setPlacedon(LocalDateTime.now());
+            purchaseOrder.setDeliveredor(LocalDateTime.of(2005,12,4,5,6,7));
+            purchaseOrder.setStatus(Status.ESTADO_1);
+            purchaseOrder.setTotal(15);
+            template.insert(purchaseOrder);
+
+            template.edge(author, "escribe", book, Collections.emptyMap());
+
+            template.edge(c,"realizó", purchaseOrder, Collections.emptyMap());
+
+            template.edge(lineItem, "referencia", book, Collections.emptyMap());
+
+            template.edge(i, "stock_de", book, Collections.emptyMap());
+
+            template.edge(purchaseOrder, "contiene", lineItem, Collections.emptyMap());
+
+
+
+
+
+
+
 
         } catch (Exception e) {
             System.err.println("Error en el flujo de grafos: " + e.getMessage());
