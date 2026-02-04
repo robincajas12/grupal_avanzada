@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Book {
     @Id
     private String isbn;

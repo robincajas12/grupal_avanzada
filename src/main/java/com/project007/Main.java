@@ -1,16 +1,14 @@
 package com.project007;
 
 import com.project007.db.*;
+import com.project007.repositories.BookRepository;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
-import org.eclipse.jnosql.mapping.graph.EdgeBuilder;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -65,8 +63,7 @@ public class Main {
 
             template.edge(purchaseOrder, "contiene", lineItem, Collections.emptyMap());
 
-
-
+            container.select(BookRepository.class).get().findAll().get().forEach(System.out::println);
 
 
 
