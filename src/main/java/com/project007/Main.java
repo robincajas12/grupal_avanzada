@@ -1,6 +1,7 @@
 package com.project007;
 
 import com.project007.db.*;
+import com.project007.db.relations.BookRelations;
 import com.project007.repositories.BookRepository;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
@@ -64,14 +65,15 @@ public class Main {
             template.edge(purchaseOrder, "contiene", lineItem, Collections.emptyMap());
 
             container.select(BookRepository.class).get().findAll().get().forEach(System.out::println);
-
-
+            BookRelations relations = container.select(BookRelations.class).get();
+            relations.book(book).addAuthor(author).save();
 
 
 
         } catch (Exception e) {
             System.err.println("Error en el flujo de grafos: " + e.getMessage());
             e.printStackTrace();
+
         }
     }
 }
