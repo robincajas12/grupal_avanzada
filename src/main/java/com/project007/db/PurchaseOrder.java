@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Setter
 @Getter
@@ -21,7 +22,7 @@ import java.util.List;
 public class PurchaseOrder {
 
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     @Column
     private LocalDateTime deliveredor;
@@ -36,11 +37,4 @@ public class PurchaseOrder {
     @Convert(StatusConverter.class)
     private Status status;
 
-//    // Relación hacia Customer
-//    @Column("ORDERED_BY")
-//    private Customer customer;
-//
-//    // Relación hacia los items de la orden
-//    @Column("CONTAINS")
-//    private List<LineItem> items;
 }

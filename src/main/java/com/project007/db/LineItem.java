@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -16,8 +18,8 @@ import lombok.Setter;
 @Entity
 public class LineItem {
 
-    @Id("order_id")
-    private String id;
+    @Id
+    private String id= UUID.randomUUID().toString();
 
     @Column
     private Integer quantity;
@@ -25,7 +27,4 @@ public class LineItem {
     @Column
     private Integer idx;
 
-//    // Relación hacia el libro (Muchos items pueden apuntar al mismo libro)
-//    @Column("REFERENCES_BOOK")
-//    private Book book;
 }

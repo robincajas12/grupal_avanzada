@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Setter
 @Getter
@@ -15,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Author {
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     @Column
     private String name;

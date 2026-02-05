@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Entity
 public class Inventory {
     @Id
-    private String bookIsbn;
+    private String bookIsbn = UUID.randomUUID().toString();
 
     @Column
     private Long sold;

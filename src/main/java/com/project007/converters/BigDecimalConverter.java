@@ -1,4 +1,4 @@
-package com.project007.db;
+package com.project007.converters;
 
 import jakarta.nosql.AttributeConverter;
 import java.math.BigDecimal;

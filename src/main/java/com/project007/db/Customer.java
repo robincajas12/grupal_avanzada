@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Setter
 @Getter
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Entity
 public class Customer {
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     @Column
     private String name;
