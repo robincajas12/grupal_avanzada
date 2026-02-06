@@ -13,7 +13,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class AuthorRelations {
-    private Author author; // Ahora el autor es la raíz
+    private Author author;
 
     @Inject
     GraphTemplate template;
@@ -33,7 +33,6 @@ public class AuthorRelations {
 
     public void save() {
         books.forEach(book -> {
-            // Se mantiene la dirección lógica: Autor -> escribe -> Libro
             template.edge(author, "escribe", book, Collections.emptyMap());
         });
     }
