@@ -2,12 +2,13 @@ package com.project007.db.relations;
 
 import com.project007.db.Book;
 import com.project007.db.Inventory;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.util.Collections;
 
-
+@ApplicationScoped
 public class InventoryRelations {
 
     private Inventory inventory;

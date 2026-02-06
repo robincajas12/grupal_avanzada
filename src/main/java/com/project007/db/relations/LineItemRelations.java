@@ -4,6 +4,7 @@ import com.project007.db.Book;
 import com.project007.db.LineItem;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.Getter;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.util.ArrayList;
@@ -23,10 +24,6 @@ public class LineItemRelations {
     public LineItemRelations book(Book book) {
         this.book = book;
         return this;
-    }
-
-    public List<LineItem> getItems() {
-        return items;
     }
 
     public LineItemRelations addItem(LineItem item) {

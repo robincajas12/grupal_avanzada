@@ -4,6 +4,7 @@ import com.project007.db.Author;
 import com.project007.db.Book;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.Getter;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.util.ArrayList;
@@ -17,15 +18,12 @@ public class AuthorRelations {
     @Inject
     GraphTemplate template;
 
-    private List<Book> books = new ArrayList<>(); // Lista de libros escritos
+
+    private List<Book> books = new ArrayList<>();
 
     public AuthorRelations author(Author author) {
         this.author = author;
         return this;
-    }
-
-    public List<Book> getBooks() {
-        return books;
     }
 
     public AuthorRelations addBook(Book book) {

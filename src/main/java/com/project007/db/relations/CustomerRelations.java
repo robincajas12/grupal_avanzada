@@ -6,6 +6,7 @@ import com.project007.db.Customer;
 import com.project007.db.PurchaseOrder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.Getter;
 import org.eclipse.jnosql.mapping.graph.GraphTemplate;
 
 import java.util.ArrayList;
@@ -24,10 +25,6 @@ public class CustomerRelations {
     public CustomerRelations customer(Customer customer) {
         this.customer = customer;
         return this;
-    }
-
-    public List<PurchaseOrder> getOrders() {
-        return orders;
     }
 
     public CustomerRelations addOrder(PurchaseOrder order) {
